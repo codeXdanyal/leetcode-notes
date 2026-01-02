@@ -1,4 +1,5 @@
 # LeetCode Problem 20: Valid Parentheses
+Leetcode Problem Link: https://leetcode.com/problems/valid-parentheses
 
 ### Table of Contents
 - [Problem Description](#problem-description)
