@@ -1,5 +1,5 @@
 # LeetCode Problem 20: Valid Parentheses
-Leetcode Problem Link: https://leetcode.com/problems/valid-parentheses
+**Leetcode Problem Link:** https://leetcode.com/problems/valid-parentheses
 
 ### Table of Contents
 - [Problem Description](#problem-description)
@@ -11,6 +11,8 @@ Leetcode Problem Link: https://leetcode.com/problems/valid-parentheses
 - [Why This Approach Works](#why-this-approach-works)
 - [Time and Space Complexity](#time-and-space-complexity)
 - [Complete Code Implementation](#complete-code-implementation)
+- [Dry Run](#dry-run)
+- [Roman Urdu Notes](#roman-urdu-notes)
 
 ## Problem Description
 Given a string s containing just the characters `'(', ')', '{', '}', '['` and `']'`, determine if the input string is valid.
@@ -126,5 +128,54 @@ public:
     }
 };
 ```
+## Dry Run
+
+**Example 1: `"([{}])"`**  
+
+Start with an empty stack.
+
+1. `'('` is opening → push → stack: `'('`  
+2. `'['` is opening → push → stack: `'(', '['`  
+3. `'{'` is opening → push → stack: `'(', '[', '{'`  
+4. `'}'` is closing → top is `'{'` → matches → pop → stack: `'(', '['`  
+5. `']'` is closing → top is `'['` → matches → pop → stack: `'('`  
+6. `')'` is closing → top is `'('` → matches → pop → stack empty  
+
+**Result:** Stack is empty at the end → return `true`. String is valid.
+
+**Example 2: `"([)]"`**  
+
+Start with an empty stack.
+
+1. `'('` is opening → push → stack: `'('`  
+2. `'['` is opening → push → stack: `'(', '['`  
+3. `')'` is closing → top is `'['` → does not match → return `false`  
+
+**Result:** String is invalid because the closing bracket does not match the last opening bracket.
 
 
+# Roman Urdu Notes
+
+## Problem Understanding
+Hamein ek string di gayi hai jo sirf parentheses characters `()`, `{}`, aur `[]` se bani hai. Hamara kaam ye determine karna hai ke string valid hai ya nahi. Ek string valid tab hoti hai jab do conditions puri hon: har opening bracket ka ek corresponding closing bracket ho aur brackets sahi order mein close hon. Agar koi bracket match nahi karta ya galat order mein hai, to string invalid hai. Goal ye hai ke agar string valid ho to `true` return karein, warna `false`.
+
+## Key Observations
+Is problem ke liye stack data structure perfect hai kyun ke ye Last-In-First-Out (LIFO) order follow karta hai. Jo last opening bracket mila hai, wo next closing bracket ke saath match hona chahiye. Stack ka use karke hum recently opened bracket ko current closing bracket ke saath efficiently check kar sakte hain. Har bracket sirf ek baar process hota hai aur extra memory stack ke alawa nahi chahiye.
+
+## Constraints Analysis
+String ki length 1 se 10,000 characters tak ho sakti hai. Empty string ko valid maana jata hai. Agar string mein sirf ek bracket ho to wo invalid hai. Brackets kisi bhi combination mein nested ho sakte hain, is liye solution ko `"([{}])"` aur `"([)]"` jaisi sequences ko correctly handle karna chahiye. Performance ka issue nahi hai kyun ke string ka size reasonable hai, lekin algorithm ko edge cases aur nested brackets ke liye sahi handle karna zaroori hai.
+
+## Edge Cases
+- Agar string empty ho, to `true` return karein.  
+- Agar string mein sirf ek bracket ho, to `false` return karein.  
+- Agar closing bracket apne corresponding opening bracket se pehle aaye, to `false` return karein.  
+Ye checks errors ko prevent karte hain jaise ke empty stack se element access karna.
+
+## My Approach (Step-by-Step)
+Sab se pehle check karein agar string empty ho, agar ho to `true` return karein. Ek empty stack initialize karein. String ke har character par iterate karein. Agar character opening bracket ho (`(, {, [`), to stack mein push karein. Agar character closing bracket ho (`), }, ]`), to check karein ke stack empty nahi hai aur top element is closing bracket ke saath match karta hai. Agar match karta hai to top element pop karein. Agar match nahi karta to `false` return karein. Sab characters process karne ke baad check karein agar stack empty hai. Agar empty hai to `true` return karein, warna `false`.
+
+## Why This Approach Works
+Stack ensure karta hai ke brackets sahi order mein match ho. Last opened bracket hamesha stack ke top pe hota hai, jo guarantee karta hai ke ye next closing bracket ke saath correct pair banaye. Har opening bracket ek baar push hota hai aur ek baar pop, is liye sab brackets accurately check hote hain, nested aur sequential brackets ke liye bhi.
+
+## Time and Space Complexity
+Time complexity `O(n)` hai, jahan n string ki length hai, kyun ke har character sirf ek baar process hota hai. Space complexity `O(n)` worst case mein hai agar saare characters opening brackets hon, kyun ke wo sab stack mein store honge.
