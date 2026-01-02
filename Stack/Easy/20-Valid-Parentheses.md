@@ -169,7 +169,7 @@ String ki length 1 se 10,000 characters tak ho sakti hai. Empty string ko valid 
 - Agar string empty ho, to `true` return karein.  
 - Agar string mein sirf ek bracket ho, to `false` return karein.  
 - Agar closing bracket apne corresponding opening bracket se pehle aaye, to `false` return karein.  
-Ye checks errors ko prevent karte hain jaise ke empty stack se element access karna.
+- Ye checks errors ko prevent karte hain jaise ke empty stack se element access karna.
 
 ## My Approach (Step-by-Step)
 Sab se pehle check karein agar string empty ho, agar ho to `true` return karein. Ek empty stack initialize karein. String ke har character par iterate karein. Agar character opening bracket ho (`(, {, [`), to stack mein push karein. Agar character closing bracket ho (`), }, ]`), to check karein ke stack empty nahi hai aur top element is closing bracket ke saath match karta hai. Agar match karta hai to top element pop karein. Agar match nahi karta to `false` return karein. Sab characters process karne ke baad check karein agar stack empty hai. Agar empty hai to `true` return karein, warna `false`.
