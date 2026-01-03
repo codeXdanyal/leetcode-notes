@@ -1,9 +1,20 @@
 # Leetcode 83. Remove Duplicates from Sorted List
 
+### Table of Content
 
-### Table of Content 
-
-
+- [Problem](#problem)
+- [Examples](#example-1)
+- [Constraints](#constraints)
+- [Problem Understanding](#problem-understanding)
+- [Key Observations](#key-observations)
+- [Constraints Analysis](#constraints-analysis)
+- [Edge Cases](#edge-cases)
+- [My Approach (Step-by-Step)](#my-approach-step-by-step)
+- [Why This Approach Works](#why-this-approach-works)
+- [Time and Space Complexity](#time-and-space-complexity)
+- [Complete Code Implementation](#complete-code-implementation)
+- [Dry Run Example](#dry-run-example)
+- [Notes (Roman urdu Version)](#notes-roman-urdu-version)
 
 ## Problem
 
