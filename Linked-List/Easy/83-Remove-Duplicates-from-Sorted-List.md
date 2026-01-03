@@ -14,6 +14,7 @@
 - [Time and Space Complexity](#time-and-space-complexity)
 - [Complete Code Implementation](#complete-code-implementation)
 - [Dry Run Example](#dry-run-example)
+- [Short Version of code (Same Logic)](#short-version-of-code-same-logic)
 - [Notes (Roman urdu Version)](#notes-roman-urdu-version)
 
 ## Problem
@@ -63,7 +64,7 @@ Because the list is sorted, duplicates are guaranteed to be adjacent. This allow
 The algorithm traverses the list once, resulting in **O(n)** time complexity, where `n` is the number of nodes. It uses constant extra space, so the space complexity is `O(1)`.
 
 ## Complete Code Implementation
-```cpp
+```cpp []
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
@@ -116,6 +117,18 @@ public:
 1 → 2 → 3 → nullptr
 ```
 
+###  Short Version of code (Same Logic)
+
+```cpp []
+for (ListNode* temp = head; temp && temp->next;) {
+    if (temp->val == temp->next->val) {
+        temp->next = temp->next->next;
+    } else {
+        temp = temp->next;
+    }
+}
+return head;
+```
 
 # Notes (Roman urdu Version)
 
