@@ -1,10 +1,7 @@
-# Leetcode 83. Remove Duplicates from Sorted List
+# LeetCode Problem 83: Remove Duplicates from Sorted List
 
 ### Table of Content
-
-- [Problem](#problem)
-- [Examples](#example-1)
-- [Constraints](#constraints)
+- [Problem Description](#problem-description)
 - [Problem Understanding](#problem-understanding)
 - [Key Observations](#key-observations)
 - [Constraints Analysis](#constraints-analysis)
@@ -13,16 +10,15 @@
 - [Why This Approach Works](#why-this-approach-works)
 - [Time and Space Complexity](#time-and-space-complexity)
 - [Complete Code Implementation](#complete-code-implementation)
-- [Dry Run Example](#dry-run-example)
 - [Short Version of code (Same Logic)](#short-version-of-code-same-logic)
-- [Notes (Roman urdu Version)](#notes-roman-urdu-version)
+- [Dry Run](#dry-run)
+- [Roman Urdu Notes](#notes-roman-urdu-version)
 
-## Problem
+## Problem Description
 
 Given the `head` of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list `sorted` as well.
 
 ![before and after](../Daigrams/before_after.webp)
-
 
 #### Example 1:
 ```text
@@ -34,14 +30,12 @@ Output: [1,2]
 Input: head = [1,1,2,3,3]
 Output: [1,2,3]
 ``` 
-
 ### Constraints:
 
 - The number of nodes in the list is in the range `[0, 300]`.
 - `-100 <= Node.val <= 100`
 - The list is guaranteed to be **sorted** in **ascending order**.
  
-
 ## Problem Understanding
 You are given the **head** of a singly linked list that is already **sorted** in **ascending order**. Because the list is sorted, any duplicate values will always appear next to each other. The task is to remove these duplicate nodes so that each value appears only once, while keeping the list sorted. After removing duplicates, you must return the **original head** of the modified list.
 
@@ -91,7 +85,20 @@ public:
     }
 };
 ```
-### Dry Run Example
+
+##  Short Version of code (Same Logic)
+
+```cpp []
+for (ListNode* temp = head; temp && temp->next;) {
+    if (temp->val == temp->next->val) {
+        temp->next = temp->next->next;
+    } else {
+        temp = temp->next;
+    }
+}
+return head;
+```
+## Dry Run
 **Input**
 ```text
 1 → 1 → 2 → 3 → 3 → nullptr
@@ -101,7 +108,7 @@ public:
   
     ![Alt text](../Daigrams/first_iteration.webp)
 
-- List becomes:` 1 → 2 → 3 → 3`
+    - List becomes:` 1 → 2 → 3 → 3`
 - Move to `2`, compare with `3` → not duplicate → move forward
   
     ![Alt text](../Daigrams/second_iteration.webp)
@@ -117,49 +124,36 @@ public:
 1 → 2 → 3 → nullptr
 ```
 
-###  Short Version of code (Same Logic)
+# Roman Urdu Notes
 
-```cpp []
-for (ListNode* temp = head; temp && temp->next;) {
-    if (temp->val == temp->next->val) {
-        temp->next = temp->next->next;
-    } else {
-        temp = temp->next;
-    }
-}
-return head;
-```
-
-# Notes (Roman urdu Version)
-
-### Problem
+## Problem
 
 Aap ko ek sorted linked list ka head diya gaya hai. Aap ka task yeh hai ke saare duplicate elements remove kar dein taake har element sirf ek dafa appear ho. Aakhir mein linked list ko sorted form mein return karna hai.
 
-### Problem Understanding
+## Problem Understanding
 
 Aap ko ek singly linked list ka head diya gaya hai jo pehle se ascending order mein sorted hai. Kyun ke list sorted hai, is liye koi bhi duplicate values hamesha ek doosre ke sath (adjacent) hongi. Aap ka kaam yeh duplicates remove karna hai taake har value sirf ek martaba aaye, aur list ka order bhi maintain rahe. Duplicates remove karne ke baad, aap ko modified list ka original head return karna hai.
 
-### Key Observations
+## Key Observations
 
 Kyunkay linked list sorted hai, duplicates sirf consecutive nodes mein hi ho sakti hain. Is property ki wajah se hum problem ko efficiently solve kar sakte hain sirf ek dafa list traverse kar ke. Kisi bhi extra memory ya data structure ki zaroorat nahi hoti.
 
-### Constraints Analysis
+## Constraints Analysis
 
 List mein 0 se 300 tak nodes ho sakte hain, aur node values -100 se 100 ke darmiyan hoti hain. Yeh constraints kaafi chhote hain, is liye performance ka masla nahi hota, lekin solution phir bhi clean aur logically correct hona chahiye. List ka sorted hona is problem ka sab se important constraint hai jo solution ko simple bana deta hai.
 
-### Edge Cases
+## Edge Cases
 
 Agar list empty ho (head == nullptr), to remove karne ke liye kuch bhi nahi hota, is liye nullptr return kar dete hain. Agar list mein sirf ek node ho, to us mein duplicates ho hi nahi sakte, is liye head ko as-it-is return kar dete hain. Yeh checks unnecessary traversal se bachate hain aur null pointer errors ko avoid karte hain.
 
-### My Approach (Step-by-Step)
+## My Approach (Step-by-Step)
 
 List ke head se traversal start karte hain ek temporary pointer ki madad se. Traversal tab tak continue hoti hai jab tak current node ya us ka next node null na ho jaye. Har step par current node ki value ko next node ki value ke sath compare karte hain. Agar dono values same hon, to next node ko skip kar dete hain pointer adjust kar ke, jis se duplicate effectively remove ho jata hai. Agar values different hon, to pointer normally aage move kar deta hai. Yeh process list ke end tak continue hota hai, aur aakhir mein head return kar diya jata hai.
 
-### Why This Approach Works
+## Why This Approach Works
 
 Kyunkay list sorted hoti hai, is liye duplicates hamesha adjacent hote hain. Is wajah se hum list ko in-place modify kar sakte hain bina kisi additional memory ke. Yeh approach original node order ko maintain karti hai aur ensure karti hai ke sirf unique values hi baqi rahen.
 
-### Time and Space Complexity
+## Time and Space Complexity
 
 Algorithm list ko sirf ek dafa traverse karta hai, jis ki wajah se time complexity O(n) hoti hai, jahan n nodes ki total tadaad hai. Extra space use nahi hoti, is liye space complexity O(1) hoti hai.
